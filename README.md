@@ -1,3 +1,15 @@
+
+# 사다리 게임
+ - n개의 사람과 m개의 사다리 개수를 입력해서 사다리를 터미널에 랜덤하게 표시
+ 
+# 사용
+ - swift 기본 문법
+ - 함수/객체 역할 분리
+ - 단위 테스트 작성
+
+# 실행결과
+![preview](https://github.com/HaeSeongPark/swift-laddergame/blob/HaeSeongPark/preview2.gif)
+
 # 진행 방법
 
 - 사다리 게임에 요구사항을 파악한다.

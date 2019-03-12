@@ -26,6 +26,7 @@ struct LadderGame {
     private var ladderGameResult:LadderGameResult
     private var heightOfLadder:Int
     private var numberOfLadder:Int = 0
+    var tempRowsAndCols : [(row:Int,col:Int)] = []
     init(_ names:[String], _ heightOfLadder:Int) {
         ladderGameResult = LadderGameResult()
         for name in names{
@@ -38,10 +39,35 @@ struct LadderGame {
         ladderGameResult.ladderMatrix = Array(repeating: Array(repeating: false, count: ladderGameResult.names.count-1), count: heightOfLadder)
         
         numberOfLadder = ( ladderGameResult.names.count + heightOfLadder ) / 2
-        
-        for _ in 0..<numberOfLadder{
-            ladderGameResult.ladderMatrix[heightOfLadder.arc4random][(ladderGameResult.names.count-1).arc4random] = true
+
+        while tempRowsAndCols.count < numberOfLadder {
+            let tempRow = heightOfLadder.arc4random
+            let tempCol = (ladderGameResult.names.count-1).arc4random
+            if !isDuplicate(tempRow, tempCol) && !isConnectedBridge(tempRow, tempCol){
+                tempRowsAndCols.append((tempRow,tempCol))
+                ladderGameResult.ladderMatrix[tempRow][tempCol] = true
+            }
         }
         return ladderGameResult
+    }
+    
+    func isDuplicate(_ tempRow:Int, _ tempCol:Int) -> Bool{
+        for tempRowAndCol in tempRowsAndCols{
+            if tempRowAndCol.row == tempRow && tempRowAndCol.col == tempCol{
+                return true
+            }
+        }
+        return false
+    }
+    
+    func isConnectedBridge(_ tempRow:Int, _ tempCol:Int) -> Bool {
+        for tempRowAndCol in tempRowsAndCols{
+            if tempRowAndCol.row == tempRow {
+                if tempRowAndCol.col - 1 == tempCol || tempRowAndCol.col + 1 == tempCol{
+                    return true
+                }
+            }
+        }
+        return false
     }
 }

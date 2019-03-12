@@ -42,10 +42,11 @@ struct Output {
         for player in players{
             printName(player)
         }
+        print("\n")
     }
     
     private static func printName(_ player:LadderPlayer){
-        let emptySapce = repeatElement(" ", count: 6-player.name.count).joined(separator:"")
+        let emptySapce = repeatElement(" ", count: abs(6-player.name.count)).joined(separator:"")
         print(player.name, terminator:emptySapce)
     }
 }
